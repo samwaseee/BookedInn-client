@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className='font-jost'>
         <Navbar></Navbar>
         <Outlet></Outlet>
         <Footer></Footer>
