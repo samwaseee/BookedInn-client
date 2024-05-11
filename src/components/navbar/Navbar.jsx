@@ -1,7 +1,10 @@
 import { FaStar } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
+
+    const { user } = useAuth();
 
     const links = <>
         <li><NavLink to="/" className="rounded-sm" style={({ isActive, isTransitioning }) => {
@@ -42,7 +45,7 @@ const Navbar = () => {
         }}>About Us</NavLink></li>
         <li>
             {
-                // user &&
+                user &&
                 <NavLink to="/myBookings" className="rounded-sm" style={({ isActive, isTransitioning }) => {
                     return {
                         fontWeight: isActive ? "bold" : "",
@@ -54,18 +57,6 @@ const Navbar = () => {
                 }}>My Bookings</NavLink>
             }
         </li>
-        <li>{
-            // // user &&
-            // <NavLink to={`/myList/${user.email}/${user.displayName}`} className="rounded-sm" style={({ isActive, isTransitioning }) => {
-            //     return {
-            //         fontWeight: isActive ? "bold" : "",
-            //         color: isActive ? "#b99d75" : "white",
-            //         backgroundColor: isActive ? "transparent" : "",
-            //         borderBottom: isActive ? "solid #b99d75" : "",
-            //         viewTransitionName: isTransitioning ? "slide" : "",
-            //     };
-            // }}>My List</NavLink>
-        }</li>
     </>
 
     return (
@@ -88,15 +79,26 @@ const Navbar = () => {
             <div className="grid">
                 <a className="btn btn-ghost text-4xl font-mar">BookedInn</a>
                 <div className="flex gap-2 items-center justify-center">
-                    <FaStar size={7}  color="#b99d75"/>
-                    <FaStar size={10} color="#b99d75"/>
-                    <FaStar size={15}  color="#b99d75"/>
-                    <FaStar size={10}  color="#b99d75"/>
-                    <FaStar size={7} color="#b99d75"/>
+                    <FaStar size={7} color="#b99d75" />
+                    <FaStar size={10} color="#b99d75" />
+                    <FaStar size={15} color="#b99d75" />
+                    <FaStar size={10} color="#b99d75" />
+                    <FaStar size={7} color="#b99d75" />
                 </div>
             </div>
-            <div className="navbar-end">
-                <a className="btn btn-outline text-[#b99d75] rounded-none">Sign In</a>
+            <div className="navbar-end grid md:flex">
+                {
+                    user ?
+                        <div className="flex gap-3 items-center">
+                            <a data-tooltip-id="my-tooltip" data-tooltip-content={user.displayName}>
+                                <button className=""> <img src={user.photoURL} alt="No image" className="rounded-badge w-10" /> </button>
+                            </a>
+                            <Tooltip id="my-tooltip" />
+                            <button onClick={handleSignout} className="btn btn-outline text-white bg-[#ab978ad9]">Log Out</button>
+                        </div>
+                        :
+                        <Link to={'/login'}><button className="btn btn-outline text-white bg-[#452820]">Log In</button></Link>
+                }
             </div>
         </div>
     );
