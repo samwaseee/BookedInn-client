@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import SocialLogin from "./SocialLogin";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
+import { Helmet } from "react-helmet";
 
 
 const SignIn = () => {
@@ -56,14 +57,14 @@ const SignIn = () => {
 
     return (
         <div className="hero">
-            {/* <Helmet>
-                <title>SAM's RESIDENCE | Login</title>
-            </Helmet> */}
-            <div className="">
+            <Helmet>
+                <title>BookedInn | Login</title>
+            </Helmet>
+            <div className="my-11 text-primary">
                 <div className="text-center lg:text-left">
-                    <h1 className="text-5xl font-bold my-10">Login account</h1></div>
-                <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                    <form onSubmit={handleLogin} className="card-body">
+                    <h1 className="text-5xl font-mar font-bold my-10">Login account</h1></div>
+                <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-secondary rounded-none p-2">
+                    <form onSubmit={handleLogin} className="card-body border-2 border-primary">
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
@@ -85,11 +86,11 @@ const SignIn = () => {
                                     setFormValues({ ...formValues, password: e.target.value })
                                 }
                                 required name='password' placeholder="password" className="input input-bordered" />
-                            <label className="label"><span className="relative bottom-10 left-56" onClick={() => setShowPass(!showPass)}>{
+                            <label className="label"><span className="relative bottom-10 left-48" onClick={() => setShowPass(!showPass)}>{
                                 showPass ? <VscEyeClosed></VscEyeClosed> : <VscEye />} </span></label>
                         </div>
                         <div className="form-control mt-4">
-                            <button className="btn btn-outline">Login</button>
+                            <button className="btn bg-primary rounded-none">Login</button>
                         </div>
 
                     </form>
@@ -101,7 +102,7 @@ const SignIn = () => {
                     }
                     <p className='mb-2 text-xl flex justify-center items-center gap-2'> <span> <hr className='w-20' /> </span> <span> Or </span> <hr className='w-20' /> </p>
                     <SocialLogin></SocialLogin>
-                    <p className='mx-auto pb-5'> Don't have an account <Link to={'/Register'} className='font-bold'>Register</Link> </p>
+                    <p className='mx-auto pb-5'> Don`t have an account <Link to={'/Register'} className='font-bold'>Register</Link> </p>
                 </div>
             </div>
         </div>

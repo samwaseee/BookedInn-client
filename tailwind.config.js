@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: 'rgb(var(--color-primary) / #b99d75)',
-        secondary: 'rgb(var(--color-secondary) / #53624e)',
+        primary: '#b99d75',
+        secondary: '#53624e',
       },
       fontFamily: {
         jost: "'Jost', sans-serif",

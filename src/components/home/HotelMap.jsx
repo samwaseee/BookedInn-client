@@ -10,7 +10,7 @@ export function MyMap() {
 
 const HotelMap = () => {
     return (
-        <div className="max-w-7xl mx-auto border border-secondary p-4">
+        <div className="max-w-7xl mx-auto border border-primary p-4">
             {MyMap()}
         </div>
     );

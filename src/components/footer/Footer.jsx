@@ -36,7 +36,7 @@ const Footer = () => {
                             </nav>
                         </nav>
                     </div>
-                    <hr className='border-2 my-10' />
+                    <div className='border-b-2 border-primary my-10' />
                     <div>
                         <footer className="text-center">
                             <aside className="">

@@ -10,7 +10,7 @@ const Banner = () => {
                     </div>
                 </div>
             </div>
-            <div className="text-center p-1 bg-[#323d32] opacity-90 relative -top-72 left-2/3 max-w-96 text-white">
+            <div data-aos="zoom-in-up" className="text-center p-1 bg-[#323d32] opacity-90 relative -top-72 left-2/3 max-w-96 text-white">
                 <div className="border-2 border-[#b99d75] p-3 space-y-3">
                     <p className="text-sm -mb-3">CHOOSE DATE TO SEARCH</p>
                     <p className="text-3xl font-mar font-semibold">BOOK YOUR STAY</p>

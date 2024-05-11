@@ -1,10 +1,24 @@
 import { FaStar } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import { Tooltip } from "react-tooltip";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
 
-    const { user } = useAuth();
+    const { user,logOut } = useAuth();
+
+    const handleSignout = () => {
+        logOut()
+            .then(()=>{
+                toast.info("Logged Out ", {
+                    theme: "colored"
+                  })
+            })
+            .catch(error=>{
+                console.log(error)
+            })
+    }
 
     const links = <>
         <li><NavLink to="/" className="rounded-sm" style={({ isActive, isTransitioning }) => {
@@ -60,7 +74,7 @@ const Navbar = () => {
     </>
 
     return (
-        <div className="navbar bg-[url('https://cozystay.loftocean.com/countryside-lodge/wp-content/uploads/sites/5/2023/05/bg-pattern-3.jpg')]">
+        <div className="navbar h-24 bg-[url('https://cozystay.loftocean.com/countryside-lodge/wp-content/uploads/sites/5/2023/05/bg-pattern-3.jpg')]">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -91,13 +105,13 @@ const Navbar = () => {
                     user ?
                         <div className="flex gap-3 items-center">
                             <a data-tooltip-id="my-tooltip" data-tooltip-content={user.displayName}>
-                                <button className=""> <img src={user.photoURL} alt="No image" className="rounded-badge w-10" /> </button>
+                                <button className=""> <img src={user.photoURL} alt="No image" className="w-10" /> </button>
                             </a>
                             <Tooltip id="my-tooltip" />
-                            <button onClick={handleSignout} className="btn btn-outline text-white bg-[#ab978ad9]">Log Out</button>
+                            <button onClick={handleSignout} className="btn btn-outline text-primary rounded-none">Log Out</button>
                         </div>
                         :
-                        <Link to={'/login'}><button className="btn btn-outline text-white bg-[#452820]">Log In</button></Link>
+                        <Link to={'/signin'}><button className="btn btn-outline text-primary rounded-none">Log In</button></Link>
                 }
             </div>
         </div>
