@@ -18,8 +18,8 @@ const SocialLogin = () => {
 
     const handleGoogleLogin = () => {
         GoogleLogin()
-            .then(result => {
-                console.log(result.user);
+            .then(() => {
+                // console.log(result.user);
                 toast.success('Google account logged in successfully!');
                 setLogSuccess('User created successfully');
                 navigate(location?.state ? location.state : '/');
@@ -32,8 +32,8 @@ const SocialLogin = () => {
 
     const handleGithubLogin = () => {
         GithubLogin()
-            .then(result => {
-                console.log(result.user);
+            .then(() => {
+                // console.log(result.user);
                 toast.success('GitHub account logged in successfully!');
                 setLogSuccess('User created successfully')
                 navigate(location?.state ? location.state : '/');

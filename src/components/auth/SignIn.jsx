@@ -38,8 +38,8 @@ const SignIn = () => {
 
 
         signIn(email, password)
-            .then(result => {
-                console.log(result.user);
+            .then(() => {
+                // console.log(result.user);
                 navigate(location?.state ? location.state : '/');
                 toast.success("Login successful!");
             })
@@ -95,10 +95,10 @@ const SignIn = () => {
 
                     </form>
                     {
-                        LogError && <p className="text-red-700 ml-7 -mt-4 mb-4">*{LogError}</p>
+                        LogError && <p className="text-red-700 ml-7 -mt-6 mb-4">*{LogError}</p>
                     }
                     {
-                        LogSuccess && <p className="text-green-700 text-center -mt-4 mb-4">{LogSuccess}</p>
+                        LogSuccess && <p className="text-green-700 text-center -mt-6 mb-4">{LogSuccess}</p>
                     }
                     <p className='mb-2 text-xl flex justify-center items-center gap-2'> <span> <hr className='w-20' /> </span> <span> Or </span> <hr className='w-20' /> </p>
                     <SocialLogin></SocialLogin>
