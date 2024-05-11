@@ -2,7 +2,7 @@ import { Map, Marker } from "pigeon-maps"
 
 export function MyMap() {
     return (
-        <Map height={300} defaultCenter={[50.879, 4.6997]} defaultZoom={11}>
+        <Map height={500} defaultCenter={[50.879, 4.6997]} defaultZoom={11}>
             <Marker width={50} anchor={[50.879, 4.6997]} />
         </Map>
     )
@@ -10,7 +10,7 @@ export function MyMap() {
 
 const HotelMap = () => {
     return (
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto border border-secondary p-4">
             {MyMap()}
         </div>
     );

@@ -6,7 +6,7 @@ const OurStory = () => {
 				<h3 className="text-5xl font-mar">
 					Exceptional Chalets, tailored services and the experience of unique holidays	            </h3>	            <div className="cs-title-text">
 					<p className="text-xl">The CozyStay Lodge consists of exceptional hotels chalets forming a harmonious and refined environment. Each room is unique, with colourful décor, Victorian furniture and claw-foot bathtubs. We welcome guests with authentic wine country hospitality. Stay, sip, and savor the best of Napa wine country at CozyStay.</p>	            </div>                <div className="cs-title-btn">
-					<a className="btn bg-[#53624e] text-white font-mar px-14 rounded-none">
+					<a className="btn bg-secondary text-white font-mar px-14 rounded-none">
 						<span className="">Explore Our Story</span>                    </a>
 				</div>
 			</div>
@@ -29,7 +29,7 @@ const OurStory = () => {
 					<p>Blueberry Picking Experience</p>
 				</div>
 			</div>
-			<button className="btn btn-circle w-32 h-32 mx-auto grid bg-[#53624E] ">
+			<button className="btn btn-circle font-mar  w-32 h-32 mx-auto grid bg-[#53624E] -mt-14 hover:scale-150">
 				<div className="btn btn-outline h-28 w-28 rounded-full text-[#d3b283]">
 					<p>Explore Our Hotels</p>
 				</div>
