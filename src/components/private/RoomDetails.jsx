@@ -188,6 +188,9 @@ const RoomDetails = () => {
                             <h3 className="text-3xl font-mar">Charges</h3>
                             <p className="text-2xl">{pricePerNight}$/Night</p>
                         </div>
+                        {
+                            !availability && <p>Sorry, It&apos;s already being Reserved by our Guest </p>
+                        }
                         <button className={`btn bg-[#b99d75] w-full rounded-none text-xl font-mar ${availability ? '' : 'btn-disabled'}`}>Book Your Stay Now</button>
                     </div>
                 </form>
