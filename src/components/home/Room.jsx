@@ -18,7 +18,7 @@ const Room = (room) => {
                             <p>{parseInt(roomSize)}m<sup>2</sup> / {type} / {view}</p>
                         </div>
                     </div>
-                    <Link to={`/rooms/${_id}`}><button className="btn bg-secondary text-primary rounded-none">Book Now </button></Link>
+                    <Link to={`/rooms/${_id}`}><button className="btn btn-outline text-primary rounded-none">Reserve Now </button></Link>
                 </div>
             </div>
         </div>

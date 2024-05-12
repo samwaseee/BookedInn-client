@@ -9,13 +9,54 @@ import 'swiper/css/navigation';
 
 // import required modules
 import { Pagination, Navigation } from 'swiper/modules';
+import useAuth from "../../hooks/useAuth";
 
 
 const RoomDetails = () => {
 
+    const { user } = useAuth();
     const room = useLoaderData();
-    console.log(room);
-    const { amenities, availability, bathrooms, description, images, pricePerNight, reviews, roomSize, specialOffers, title, type, view } = room;
+    // console.log(user);
+    const { _id, amenities, availability, bathrooms, description, images, pricePerNight, reviews, roomSize, specialOffers, title, type, view } = room;
+
+
+    const handleBooking = e => {
+        e.preventDefault();
+        const form = e.target;
+        const name = user.displayName;
+        const email = user.email;
+        const checkIn = form.checkInDate.value;
+        const checkOut = form.checkOutDate.value;
+        const room = form.rooms.value;
+        const adult = form.adults.value;
+        const children = form.children.value;
+        const bookingDetails = {
+            customerName: name,
+            image: images[0],
+            title,
+            email,
+            checkIn,
+            checkOut, room, adult, children, pricePerNight,
+            roomId: _id
+        }
+        console.log(bookingDetails);
+
+
+        fetch('http://localhost:5000/bookings', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(bookingDetails)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.insertedId) {
+                    alert('service book successfully')
+                }
+            })
+    }
 
     return (
         <>
@@ -69,47 +110,46 @@ const RoomDetails = () => {
 
                     </div>
                 </div>
-                <div className=" bg-base-100 shadow-xl h-full ml-20">
+                <form onSubmit={handleBooking} className=" bg-base-100 shadow-xl h-full ml-20">
                     <div className="border-2 border-[#b99d75] p-8 space-y-3 px-10">
-                        <p className="text-sm -mb-3 text-center">CHOOSE DATE TO SEARCH</p>
                         <p className="text-3xl font-mar font-semibold text-center pb-5">BOOK YOUR STAY</p>
                         <div className="flex border border-[#b99d75] p-2 items-center">
                             <p className="flex-1 text-xl">Check In</p>
-                            <input type="date" defaultValue="14/05/2024" data-value="2024-05-10" className="bg-transparent p-2"></input>
+                            <input type="date" name="checkInDate" required className="bg-transparent p-2"></input>
                         </div>
                         <div className="flex border border-[#b99d75] p-2 w-80 justify-between">
                             <p className="flex-1 text-xl">Check Out</p>
-                            <input type="date" defaultValue="14/05/2024" data-value="2024-05-10" className="bg-transparent  p-2"></input>
+                            <input type="date" name="checkOutDate" required className="bg-transparent  p-2"></input>
                         </div>
                         <div className="flex border border-[#b99d75] p-2">
                             <p className="flex-1 text-xl">Rooms</p>
-                            <select name="" id="" className="bg-transparent border border-[#b99d75] w-40 p-2">
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
-                                <option value="">4</option>
-                                <option value="">5</option>
+                            <select name="rooms" id="" className="bg-transparent border border-[#b99d75] w-40 p-2">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
                             </select>
                         </div>
                         <div className="flex justify-between">
                             <div className="flex items-center border border-[#b99d75] p-2 w-1/2 mr-2">
                                 <p className="flex-1 text-xl">Adults</p>
-                                <select name="" id="" className="bg-transparent p-2">
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                    <option value="">3</option>
-                                    <option value="">4</option>
-                                    <option value="">5</option>
+                                <select name="adults" id="" className="bg-transparent p-2">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
                                 </select>
                             </div>
                             <div className="flex items-center border border-[#b99d75] p-2 w-1/2">
                                 <p className="flex-1 text-xl">Children </p>
-                                <select name="" id="" className="bg-transparent p-2">
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                    <option value="">3</option>
-                                    <option value="">4</option>
-                                    <option value="">5</option>
+                                <select name="children" id="" className="bg-transparent p-2">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
                                 </select>
                             </div>
                         </div>
@@ -118,26 +158,23 @@ const RoomDetails = () => {
                             <div className="flex gap-2">
                                 <input type="radio" name="radio-1" className="radio" />
                                 <p className="flex-1">Room Clean</p>
-                                <p>9$/per night</p>
                             </div>
                             <div className="flex gap-2">
-                                <input type="radio" name="radio-1" className="radio" />
+                                <input type="radio" name="radio-2" className="radio" />
                                 <p className="flex-1">Massage</p>
-                                <p>19$/per night</p>
                             </div>
                             <div className="flex gap-2">
-                                <input type="radio" name="radio-1" className="radio" />
+                                <input type="radio" name="radio-3" className="radio" />
                                 <p className="flex-1">Day Spa</p>
-                                <p>29$/per night</p>
                             </div>
                         </div>
                         <div className="flex border-t-2 py-5 justify-between items-center">
-                            <h3 className="text-3xl font-mar">Total</h3>
-                            <p className="text-2xl">{pricePerNight}$</p>
+                            <h3 className="text-3xl font-mar">Charges</h3>
+                            <p className="text-2xl">{pricePerNight}$/Night</p>
                         </div>
                         <button className="btn bg-[#b99d75] w-full rounded-none text-xl font-mar">Book Your Stay Now</button>
                     </div>
-                </div>
+                </form>
             </div>
 
         </>
