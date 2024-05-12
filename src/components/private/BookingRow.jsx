@@ -4,6 +4,7 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import moment from "moment";
+import PropTypes from 'prop-types';
 
 const BookingRow = ({ booking, handleDelete }) => {
     // console.log(booking);
@@ -34,7 +35,7 @@ const BookingRow = ({ booking, handleDelete }) => {
     return (
         <tr>
             <th>
-                <button onClick={() => handleDelete(_id, roomId)} className="btn btn-ghost p-1">
+                <button onClick={() => handleDelete(_id, roomId, checkIn)} className="btn btn-ghost p-1">
                     <RiDeleteBin5Line color="red" size={20} />
                 </button>
             </th>
@@ -75,6 +76,11 @@ const BookingRow = ({ booking, handleDelete }) => {
 
         </tr>
     );
+};
+
+BookingRow.propTypes = {
+    booking: PropTypes.object.isRequired,
+    handleDelete: PropTypes.func
 };
 
 export default BookingRow;

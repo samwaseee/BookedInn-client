@@ -1,11 +1,20 @@
+import moment from 'moment';
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const UpdatedBooking = () => {
     const Room = useLoaderData();
+    const navigate = useNavigate();
 
     const { adult, checkIn, checkOut, children, customerName, email, image, pricePerNight, room, roomId, title, _id } = Room;
+
+    const handleCheckInChange = (e) => {
+        const checkInDate = new Date(e.target.value);
+        checkInDate.setDate(checkInDate.getDate() + 1);
+        const checkOutInput = document.querySelector('input[name="checkOutDate"]');
+        checkOutInput.setAttribute('min', checkInDate.toISOString().split('T')[0]);
+    };
 
     const handleBookingUpdate = e => {
         e.preventDefault();
@@ -30,8 +39,10 @@ const UpdatedBooking = () => {
                     Swal.fire({
                         title: "UPDATED",
                         text: "Your Reservation is Updated!",
-                        icon: "success"
+                        icon: "success",
+                        confirmButtonColor: "#53624e"
                       });
+                      navigate('/mybookings')
                 }
             })
     }
@@ -41,13 +52,14 @@ const UpdatedBooking = () => {
             <form onSubmit={handleBookingUpdate} className=" bg-base-100 shadow-xl h-full ml-20">
                 <div className="border-2 border-[#b99d75] p-8 space-y-3 px-10">
                     <img src={image} alt={title} className='w-1/2 mx-auto' />
+                    <h3 className='text-center font-mar text-3xl py-5'>{title}</h3>
                     <div className="flex border border-[#b99d75] p-2 items-center">
                         <p className="flex-1 text-xl">Check In <span className='text-base-300'>{checkIn}</span> </p>
-                        <input type="date" name="checkInDate" required className="bg-transparent p-2"></input>
+                        <input type="date" name="checkInDate" required className="bg-transparent p-2" min={moment().format('YYYY-MM-DD')} onChange={handleCheckInChange}></input>
                     </div>
                     <div className="flex border border-[#b99d75] p-2 justify-between">
                         <p className="flex-1 text-xl">Check Out <span className='text-base-300'>{checkOut}</span> </p>
-                        <input type="date" name="checkOutDate" required className="bg-transparent  p-2"></input>
+                        <input type="date" name="checkOutDate" required className="bg-transparent  p-2" min={moment().format('YYYY-MM-DD')}></input>
                     </div>
                     <div className="flex justify-between gap-2">
                         <div className="flex border border-[#b99d75] p-2 w-1/3">

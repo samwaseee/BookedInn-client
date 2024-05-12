@@ -1,5 +1,6 @@
 import { IoIosArrowForward } from 'react-icons/io';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const RoomCard = ({ room, index }) => {
 
@@ -25,6 +26,11 @@ const RoomCard = ({ room, index }) => {
             </div>
         </div>
     );
+};
+
+RoomCard.propTypes = {
+    room: PropTypes.object.isRequired,
+    index: PropTypes.number.isRequired
 };
 
 export default RoomCard;

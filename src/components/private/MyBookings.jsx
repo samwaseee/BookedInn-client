@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import BookingRow from "./BookingRow";
 import Swal from "sweetalert2";
+import moment from "moment";
 
 const MyBookings = () => {
 
@@ -18,13 +19,43 @@ const MyBookings = () => {
             })
     }, [url]);
 
-    const handleDelete = (id, roomId) => {
+    const handleDelete = (id, roomId, checkIn) => {
+        const currentDate = moment();
+        const checkInDate = moment(checkIn, "YYYY-MM-DD");
+
+        const daysDifference = checkInDate.diff(currentDate, "days");
+
+        if (daysDifference === 0) {
+            Swal.fire({
+                icon: "warning",
+                title: "You can't cancel room reservation prior to one day",
+                color: "red",
+                confirmButtonColor: "#53624e",
+                showClass: {
+                    popup: `
+                    animate__animated
+                    animate__fadeInUp
+                    animate__faster
+                  `
+                },
+                hideClass: {
+                    popup: `
+                    animate__animated
+                    animate__fadeOutDown
+                    animate__faster
+                  `
+                }
+            });
+            return
+        }
+
+
         Swal.fire({
             title: "Are you sure?",
             text: "Your reservation will be terminated!",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "#53624e",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
@@ -52,13 +83,24 @@ const MyBookings = () => {
                 Swal.fire({
                     title: "Deleted!",
                     text: "Your reservation has been cancelled",
-                    icon: "success"
+                    icon: "success",
+                    color: "white"
+                });
+            }
+            else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    title: "Cancelled",
+                    text: "Reservation termination cancelled",
+                    icon: "error",
+                    color: "white",
+                    background: "#b99d75",
+                    confirmButtonColor: "#53624e"
                 });
             }
         });
     }
 
-    
+
 
     return (
         <div>
