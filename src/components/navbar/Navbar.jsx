@@ -11,7 +11,7 @@ const Navbar = () => {
     const handleSignout = () => {
         logOut()
             .then(()=>{
-                toast.info("Logged Out ", {
+                toast.info("Signed Out ", {
                     theme: "colored"
                   })
             })

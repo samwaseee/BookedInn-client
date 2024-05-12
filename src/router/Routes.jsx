@@ -9,6 +9,8 @@ import SignUp from "../components/auth/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import RoomDetails from "../components/private/RoomDetails";
 import MyBookings from "../components/private/MyBookings";
+import Rooms from "../components/rooms/Rooms";
+import UpdatedBooking from "../components/private/UpdatedBooking";
 
 const router = createBrowserRouter([
     {
@@ -22,6 +24,11 @@ const router = createBrowserRouter([
                 element: <Home></Home>
             },
             {
+                path: '/rooms',
+                loader: ()=> fetch('http://localhost:5000/rooms'),
+                element: <Rooms></Rooms>
+            },
+            {
                 path: '/rooms/:id',
                 loader: ({params})=> fetch(`http://localhost:5000/rooms/${params.id}`),
                 element: <PrivateRoute><RoomDetails></RoomDetails></PrivateRoute>
@@ -29,6 +36,11 @@ const router = createBrowserRouter([
             {
                 path: '/mybookings',
                 element: <PrivateRoute><MyBookings></MyBookings></PrivateRoute>
+            },
+            {
+                path: '/updatebooking/:id',
+                loader:  ({params})=> fetch(`http://localhost:5000/bookings/${params.id}`),
+                element: <PrivateRoute><UpdatedBooking></UpdatedBooking></PrivateRoute>
             },
             {
                 path: '/signin',

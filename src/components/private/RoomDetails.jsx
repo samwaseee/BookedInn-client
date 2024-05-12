@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -17,6 +17,7 @@ const RoomDetails = () => {
 
     const { user } = useAuth();
     const room = useLoaderData();
+    const navigate = useNavigate();
     // console.log(user);
     const { _id, amenities, availability, bathrooms, description, images, pricePerNight, reviews, roomSize, specialOffers, title, type, view } = room;
 
@@ -52,13 +53,23 @@ const RoomDetails = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 if (data.insertedId) {
                     Swal.fire({
                         title: "Confirmation",
                         text: "Your Reservation is confirmed!",
                         icon: "success"
-                      });
+                    });
+                    fetch(`http://localhost:5000/rooms/${_id}`, {
+                        method: 'PATCH',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            availability : false
+                        })
+                    })
+                    navigate('/')
                 }
             })
     }
@@ -177,7 +188,7 @@ const RoomDetails = () => {
                             <h3 className="text-3xl font-mar">Charges</h3>
                             <p className="text-2xl">{pricePerNight}$/Night</p>
                         </div>
-                        <button className="btn bg-[#b99d75] w-full rounded-none text-xl font-mar">Book Your Stay Now</button>
+                        <button className={`btn bg-[#b99d75] w-full rounded-none text-xl font-mar ${availability ? '' : 'btn-disabled'}`}>Book Your Stay Now</button>
                     </div>
                 </form>
             </div>

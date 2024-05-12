@@ -1,9 +1,19 @@
+import { FaRegPaperPlane } from "react-icons/fa";
 
 const Footer = () => {
     return (
         <div>
+
             <footer className="w-full bg-local bg-[url('https://cozystay.loftocean.com/countryside-lodge/wp-content/uploads/sites/5/2023/03/david-ress-0W3oxKVx5WY-unsplash.jpg')] bg-center bg-no-repeat text-base-content">
                 <div className='bg-[#0B0F0A] opacity-60 text-white h-full p-20'>
+                    <div className="my-5 space-y-5">
+                        <h1 className="text-5xl font-mar">Sign up for our newsletter</h1>
+                        <div className="flex">
+                            <input type="text" name="" id="" placeholder="Your Email Address" className="flex-1 bg-transparent border-b-2 w-full" />
+                            <button className="btn btn-ghost text-white text-xl -ml-20"> <FaRegPaperPlane /> Subscribe</button>
+                        </div>
+                        <input type="checkbox" name="" id="" /> I agree to the Privacy Policy
+                    </div>
                     <div className='footer'>
                         <aside>
                             <img src="../../../public/5-stars.png" alt="BookeInn icon" className='w-12' />
