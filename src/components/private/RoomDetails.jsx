@@ -11,6 +11,9 @@ import 'swiper/css/navigation';
 import { Pagination, Navigation } from 'swiper/modules';
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import moment from "moment";
+import { MdOutlineStar } from "react-icons/md";
+import { RxAvatar } from "react-icons/rx";
 
 
 const RoomDetails = () => {
@@ -21,6 +24,12 @@ const RoomDetails = () => {
     // console.log(user);
     const { _id, amenities, availability, bathrooms, description, images, pricePerNight, reviews, roomSize, specialOffers, title, type, view } = room;
 
+    const handleCheckInChange = (e) => {
+        const checkInDate = new Date(e.target.value);
+        checkInDate.setDate(checkInDate.getDate() + 1);
+        const checkOutInput = document.querySelector('input[name="checkOutDate"]');
+        checkOutInput.setAttribute('min', checkInDate.toISOString().split('T')[0]);
+    };
 
     const handleBooking = e => {
         e.preventDefault();
@@ -41,7 +50,7 @@ const RoomDetails = () => {
             checkOut, room, adult, children, pricePerNight,
             roomId: _id
         }
-        console.log(bookingDetails);
+        // console.log(bookingDetails);
 
 
         fetch('http://localhost:5000/bookings', {
@@ -66,7 +75,7 @@ const RoomDetails = () => {
                             'content-type': 'application/json'
                         },
                         body: JSON.stringify({
-                            availability : false
+                            availability: false
                         })
                     })
                     navigate('/')
@@ -131,11 +140,11 @@ const RoomDetails = () => {
                         <p className="text-3xl font-mar font-semibold text-center pb-5">BOOK YOUR STAY</p>
                         <div className="flex border border-[#b99d75] p-2 items-center">
                             <p className="flex-1 text-xl">Check In</p>
-                            <input type="date" name="checkInDate" required className="bg-transparent p-2"></input>
+                            <input type="date" name="checkInDate" required className="bg-transparent p-2" min={moment().format('YYYY-MM-DD')} onChange={handleCheckInChange}></input>
                         </div>
                         <div className="flex border border-[#b99d75] p-2 w-80 justify-between">
                             <p className="flex-1 text-xl">Check Out</p>
-                            <input type="date" name="checkOutDate" required className="bg-transparent  p-2"></input>
+                            <input type="date" name="checkOutDate" required className="bg-transparent  p-2" min={moment().format('YYYY-MM-DD')}></input>
                         </div>
                         <div className="flex border border-[#b99d75] p-2">
                             <p className="flex-1 text-xl">Rooms</p>
@@ -194,6 +203,31 @@ const RoomDetails = () => {
                         <button className={`btn bg-[#b99d75] w-full rounded-none text-xl font-mar ${availability ? '' : 'btn-disabled'}`}>Book Your Stay Now</button>
                     </div>
                 </form>
+            </div>
+            <h2 className="lg:ml-20 font-mar text-4xl font-semibold">Room Reviews</h2>
+            <div className="mx-auto max-w-[90vw] space-y-5 my-10">
+                {
+                    reviews.length>0 ?
+                    reviews.map((review, index) =>
+                        <div key={index} className="card bg-base-100 shadow-xl">
+                            <div className="card-body flex-row items-center gap-14">
+                                <div>
+                                    <RxAvatar size={50} />
+                                    <h4>{review.name}</h4>
+                                </div>
+                                <div className="flex-1">
+                                    <h2 className="card-title">{review.rating} <MdOutlineStar color="gold" size={25} /></h2>
+                                    <p className="max-w-96">{review.review}</p>
+
+                                </div>
+                                <div className="card-actions text-end">
+                                    <p>{review.time}</p>
+                                </div>
+                            </div>
+                        </div>
+                    ) :
+                    <p>No reviews available for the room currently</p>
+                }
             </div>
 
         </>

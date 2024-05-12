@@ -18,7 +18,7 @@ const MyBookings = () => {
             })
     }, [url]);
 
-    const handleDelete = (id,roomId) => {
+    const handleDelete = (id, roomId) => {
         Swal.fire({
             title: "Are you sure?",
             text: "Your reservation will be terminated!",
@@ -58,9 +58,11 @@ const MyBookings = () => {
         });
     }
 
+    
+
     return (
         <div>
-            <h2 className="text-5xl text-center my-5 font-semibold">{user.displayName} Reservations</h2>
+            <h2 className="text-5xl text-center my-5">{user.displayName} Reservations</h2>
             <div className="overflow-x-auto w-full">
                 <table className="table w-full">
                     <thead>
@@ -75,6 +77,8 @@ const MyBookings = () => {
                             <th>Check In Date</th>
                             <th>Price</th>
                             <th>Update Reservation</th>
+                            <th>Review</th>
+
                         </tr>
                     </thead>
                     <tbody>

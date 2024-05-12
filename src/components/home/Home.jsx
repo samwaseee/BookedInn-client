@@ -8,12 +8,14 @@ import { Autoplay, EffectCoverflow, Pagination, Navigation } from 'swiper/module
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
+import moment from "moment";
 
 
 
 const home = () => {
 
-    const rooms = useLoaderData()
+    const rooms = useLoaderData();
+    //console.log(moment().format('MMMM Do YYYY, h:mm:ss a'))
 
     return (
         <div>
