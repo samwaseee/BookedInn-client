@@ -10,6 +10,7 @@ import 'swiper/css/navigation';
 // import required modules
 import { Pagination, Navigation } from 'swiper/modules';
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 
 const RoomDetails = () => {
@@ -53,7 +54,11 @@ const RoomDetails = () => {
             .then(data => {
                 console.log(data);
                 if (data.insertedId) {
-                    alert('service book successfully')
+                    Swal.fire({
+                        title: "Confirmation",
+                        text: "Your Reservation is confirmed!",
+                        icon: "success"
+                      });
                 }
             })
     }

@@ -8,6 +8,7 @@ import SignIn from "../components/auth/SignIn";
 import SignUp from "../components/auth/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import RoomDetails from "../components/private/RoomDetails";
+import MyBookings from "../components/private/MyBookings";
 
 const router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
                 path: '/rooms/:id',
                 loader: ({params})=> fetch(`http://localhost:5000/rooms/${params.id}`),
                 element: <PrivateRoute><RoomDetails></RoomDetails></PrivateRoute>
+            },
+            {
+                path: '/mybookings',
+                element: <PrivateRoute><MyBookings></MyBookings></PrivateRoute>
             },
             {
                 path: '/signin',
