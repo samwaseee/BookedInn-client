@@ -1,28 +1,24 @@
 import axios from 'axios';
 import RoomCard from './RoomCard';
 import { useEffect, useState } from 'react';
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
+import { CiFilter } from 'react-icons/ci';
 
 const Rooms = () => {
     const [rooms, setRooms] = useState([])
-    const [minPrice, setMinPrice] = useState(100);
-    const [maxPrice, setMaxPrice] = useState(500);
-
-    const handleMinPriceChange = (event) => {
-        setMinPrice(event.target.value);
-        console.log(minPrice)
-    };
-
-    const handleMaxPriceChange = (event) => {
-        setMaxPrice(event.target.value);
-        console.log(maxPrice)
-    };
+    const [value, setValue] = useState([100, 500]);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/rooms?minPrice=${minPrice}&maxPrice=${maxPrice}`)
+        axios.get(`http://localhost:5000/rooms?minPrice=${value[0]}&maxPrice=${value[1]}`)
             .then(res => {
                 setRooms(res.data);
             })
-    }, [minPrice,maxPrice]);
+    }, [value]);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
     return (
         <div className='space-y-10 my-20'>
@@ -31,28 +27,20 @@ const Rooms = () => {
                 <h1 className='text-5xl font-mar'>Select Your Cozy Room</h1>
                 <p>In a new setting composed of exceptional hotels chalets, nestled in a forest of pine trees, the CozyStay Lodge is expanding into a harmonious and refined unit that affirms it’s purpose: to sublimate the stay of its guests by a tailor-made service.</p>
             </div>
-            <div className="px-6 max-w-sm bg-white rounded-xl shadow-md flex items-center space-x-4">
-                <h3>Filter</h3>
-                <div className="flex-shrink-0">
-                    <input
-                        type="range"
-                        min="100"
-                        max="500"
-                        value={minPrice}
-                        onChange={handleMinPriceChange}
+            <div className='md:ml-14'>
+                <Box sx={{ width: 300 }}>
+                    <div className="text-xl font-medium text-black flex items-center"><CiFilter size={30} /> Cost Range Filter </div>
+                    <Slider
+                        value={value}
+                        onChange={handleChange}
+                        valueLabelDisplay="auto"
+                        getAriaLabel={() => 'Price range'}
+                        min={100}
+                        max={500}
+                        sx={{color: '#B99D75'}}
                     />
-                    <div>Min: ${minPrice}</div>
-                </div>
-                <div className="flex-shrink-0">
-                    <input
-                        type="range"
-                        min="150"
-                        max="500"
-                        value={maxPrice}
-                        onChange={handleMaxPriceChange}
-                    />
-                    <div>Max: ${maxPrice}</div>
-                </div>
+                    <div> ${value[0]} - ${value[1]}</div>
+                </Box>
             </div>
             {
                 rooms.map((room, index) => <RoomCard
