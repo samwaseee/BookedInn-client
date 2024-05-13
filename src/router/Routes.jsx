@@ -30,33 +30,32 @@ const router = createBrowserRouter([
                 loader: () => fetch('http://localhost:5000/roomsReview'),
                 element: <Reviews></Reviews>
             },
-{
-    path: '/rooms',
-        loader: () => fetch('http://localhost:5000/rooms'),
-            element: <Rooms></Rooms>
-},
-{
-    path: '/rooms/:id',
-        loader: ({ params }) => fetch(`http://localhost:5000/rooms/${params.id}`),
-            element: <PrivateRoute><RoomDetails></RoomDetails></PrivateRoute>
-},
-{
-    path: '/mybookings',
-        element: <PrivateRoute><MyBookings></MyBookings></PrivateRoute>
-},
-{
-    path: '/updatebooking/:id',
-        loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`),
-            element: <PrivateRoute><UpdatedBooking></UpdatedBooking></PrivateRoute>
-},
-{
-    path: '/signin',
-        element: <SignIn></SignIn>
-},
-{
-    path: '/register',
-        element: <SignUp></SignUp>
-}
+            {
+                path: '/rooms',
+                element: <Rooms></Rooms>
+            },
+            {
+                path: '/rooms/:id',
+                loader: ({ params }) => fetch(`http://localhost:5000/rooms/${params.id}`),
+                element: <PrivateRoute><RoomDetails></RoomDetails></PrivateRoute>
+            },
+            {
+                path: '/mybookings',
+                element: <PrivateRoute><MyBookings></MyBookings></PrivateRoute>
+            },
+            {
+                path: '/updatebooking/:id',
+                loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`),
+                element: <PrivateRoute><UpdatedBooking></UpdatedBooking></PrivateRoute>
+            },
+            {
+                path: '/signin',
+                element: <SignIn></SignIn>
+            },
+            {
+                path: '/register',
+                element: <SignUp></SignUp>
+            }
         ]
     }
 

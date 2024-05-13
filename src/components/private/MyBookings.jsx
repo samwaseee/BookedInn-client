@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import axios from "axios";
 import BookingRow from "./BookingRow";
 import Swal from "sweetalert2";
 import moment from "moment";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyBookings = () => {
 
     const { user } = useAuth();
+    const axiosSecure = useAxiosSecure();
     const [bookings, setBookings] = useState([]);
 
-    const url = `http://localhost:5000/bookings?email=${user?.email}`;
+    const url = `/bookings?email=${user?.email}`;
     useEffect(() => {
-
-        axios.get(url)
+        axiosSecure.get(url)
             .then(res => {
                 setBookings(res.data);
             })
-    }, [url]);
+    }, [url,axiosSecure]);
 
     const handleDelete = (id, roomId, checkIn) => {
         const currentDate = moment();

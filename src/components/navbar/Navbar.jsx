@@ -11,9 +11,7 @@ const Navbar = () => {
     const handleSignout = () => {
         logOut()
             .then(()=>{
-                toast.info("Signed Out ", {
-                    theme: "colored"
-                  })
+                toast.info("Signed Out ");
             })
             .catch(error=>{
                 console.log(error)

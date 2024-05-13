@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import SocialLogin from "./SocialLogin";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { Helmet } from "react-helmet";
+import axios from "axios";
 
 
 const SignIn = () => {
@@ -40,8 +41,17 @@ const SignIn = () => {
         signIn(email, password)
             .then(() => {
                 // console.log(result.user);
-                navigate(location?.state ? location.state : '/');
-                toast.success("Login successful!");
+                const user = { email };
+                
+                //get access token
+                axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
+                    .then(res => {
+                        console.log(res.data)
+                        if (res.data.success) {
+                            toast.success("Login successful!");
+                            navigate(location?.state ? location.state : '/');
+                        }
+                    })
             })
             .catch(error => {
                 console.log(error);
@@ -90,7 +100,7 @@ const SignIn = () => {
                                 showPass ? <VscEyeClosed></VscEyeClosed> : <VscEye />} </span></label>
                         </div>
                         <div className="form-control mt-4">
-                            <button className="btn bg-primary rounded-none">Login</button>
+                            <button className="btn bg-primary rounded-none">Sign In</button>
                         </div>
 
                     </form>
