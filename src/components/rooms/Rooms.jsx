@@ -31,30 +31,27 @@ const Rooms = () => {
                 <h1 className='text-5xl font-mar'>Select Your Cozy Room</h1>
                 <p>In a new setting composed of exceptional hotels chalets, nestled in a forest of pine trees, the CozyStay Lodge is expanding into a harmonious and refined unit that affirms it’s purpose: to sublimate the stay of its guests by a tailor-made service.</p>
             </div>
-            <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
+            <div className="px-6 max-w-sm bg-white rounded-xl shadow-md flex items-center space-x-4">
+                <h3>Filter</h3>
                 <div className="flex-shrink-0">
-                    <div className="text-xl font-medium text-black">Min</div>
                     <input
                         type="range"
                         min="100"
                         max="500"
                         value={minPrice}
                         onChange={handleMinPriceChange}
-                        className="slider slider-horizontal"
                     />
-                    <div>You selected: ${minPrice}</div>
+                    <div>Min: ${minPrice}</div>
                 </div>
                 <div className="flex-shrink-0">
-                    <div className="text-xl font-medium text-black">Max</div>
                     <input
                         type="range"
                         min="150"
                         max="500"
                         value={maxPrice}
                         onChange={handleMaxPriceChange}
-                        className="slider slider-horizontal"
                     />
-                    <div>You selected: ${maxPrice}</div>
+                    <div>Max: ${maxPrice}</div>
                 </div>
             </div>
             {
