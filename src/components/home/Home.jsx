@@ -9,6 +9,7 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import moment from "moment";
+import Reviews from "./Reviews";
 
 
 
@@ -25,8 +26,8 @@ const home = () => {
 
             <div className="py-10 bg-[url('https://cozystay.loftocean.com/countryside-lodge/wp-content/uploads/sites/5/2023/05/bg-pattern-3.jpg')]">
                 <div className="text-center text-white max-w-2xl mx-auto my-10">
-                    <div><span>Welcome to CozyStay Lodge</span></div>
-                    <h3 className="text-4xl font-mar">
+                    <div><span>Welcome to BookedInn Lodge</span></div>
+                    <h3 className="text-5xl font-mar">
                         Select Your Cozy Room
                     </h3>
                     <div>
@@ -62,6 +63,16 @@ const home = () => {
                     }
                 </Swiper>
             </div>
+            <div className="flex my-20 w-[90vw] mx-auto">
+                    <div className="w-2/3">
+                        <p>DISCOVER THE SERVICES WE OFFERED</p>
+                        <h3 className="text-5xl font-mar">Chalets With All the Benefits of a Hotel</h3>
+                    </div>
+                    <div>
+                        <img src="https://cozystay.loftocean.com/countryside-lodge/wp-content/uploads/sites/5/2023/03/img-62-1200x1025.jpg" alt="" />
+                    </div>
+            </div>
+            <Reviews></Reviews>
         </div>
     );
 };

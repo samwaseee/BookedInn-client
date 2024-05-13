@@ -11,6 +11,8 @@ import RoomDetails from "../components/private/RoomDetails";
 import MyBookings from "../components/private/MyBookings";
 import Rooms from "../components/rooms/Rooms";
 import UpdatedBooking from "../components/private/UpdatedBooking";
+import { element } from "prop-types";
+import Reviews from "../components/home/Reviews";
 
 const router = createBrowserRouter([
     {
@@ -20,36 +22,41 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                loader: ()=>fetch('http://localhost:5000/rooms'),
+                loader: () => fetch('http://localhost:5000/rooms'),
                 element: <Home></Home>
             },
             {
-                path: '/rooms',
-                loader: ()=> fetch('http://localhost:5000/rooms'),
-                element: <Rooms></Rooms>
+                path: '/',
+                loader: () => fetch('http://localhost:5000/roomsReview'),
+                element: <Reviews></Reviews>
             },
-            {
-                path: '/rooms/:id',
-                loader: ({params})=> fetch(`http://localhost:5000/rooms/${params.id}`),
-                element: <PrivateRoute><RoomDetails></RoomDetails></PrivateRoute>
-            },
-            {
-                path: '/mybookings',
-                element: <PrivateRoute><MyBookings></MyBookings></PrivateRoute>
-            },
-            {
-                path: '/updatebooking/:id',
-                loader:  ({params})=> fetch(`http://localhost:5000/bookings/${params.id}`),
-                element: <PrivateRoute><UpdatedBooking></UpdatedBooking></PrivateRoute>
-            },
-            {
-                path: '/signin',
-                element: <SignIn></SignIn>
-            },
-            {
-                path: '/register',
-                element: <SignUp></SignUp>
-            }
+{
+    path: '/rooms',
+        loader: () => fetch('http://localhost:5000/rooms'),
+            element: <Rooms></Rooms>
+},
+{
+    path: '/rooms/:id',
+        loader: ({ params }) => fetch(`http://localhost:5000/rooms/${params.id}`),
+            element: <PrivateRoute><RoomDetails></RoomDetails></PrivateRoute>
+},
+{
+    path: '/mybookings',
+        element: <PrivateRoute><MyBookings></MyBookings></PrivateRoute>
+},
+{
+    path: '/updatebooking/:id',
+        loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`),
+            element: <PrivateRoute><UpdatedBooking></UpdatedBooking></PrivateRoute>
+},
+{
+    path: '/signin',
+        element: <SignIn></SignIn>
+},
+{
+    path: '/register',
+        element: <SignUp></SignUp>
+}
         ]
     }
 
