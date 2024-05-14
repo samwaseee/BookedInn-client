@@ -106,10 +106,10 @@ const Navbar = () => {
                                 <button className=""> <img src={user.photoURL} alt="No image" className="w-10" /> </button>
                             </a>
                             <Tooltip id="my-tooltip" />
-                            <button onClick={handleSignout} className="btn btn-outline text-primary rounded-none">Log Out</button>
+                            <button onClick={handleSignout} className="btn btn-outline text-primary rounded-none">Sign Out</button>
                         </div>
                         :
-                        <Link to={'/signin'}><button className="btn btn-outline text-primary rounded-none">Log In</button></Link>
+                        <Link to={'/signin'}><button className="btn btn-outline text-primary rounded-none">Sign In</button></Link>
                 }
             </div>
         </div>

@@ -5,8 +5,8 @@ const Banner = () => {
                 <div className="flex justify-between bg-black opacity-65">
                     <div className="max-w-[60vw] p-20 my-20 space-y-8">
                         <p className="text-xl">BEST PLACE FOR RELAX</p>
-                        <h3 className="text-6xl">Perfect Countryside Vacation at CozyStay Lodge</h3>
-                        <p className="text-2xl">Nestled in Napa Valley, CozyStay Lodge is a luxury boutique hotel in the heart of wine country, conveniently located in the historic Napa Mill neighbourhood, just steps from some of the best wineries and restaurants.</p>
+                        <h3 className="text-6xl">Perfect Countryside Vacation at BookedInn Lodge</h3>
+                        <p className="text-2xl">Nestled in Napa Valley, BookedInn Lodge is a luxury boutique hotel in the heart of wine country, conveniently located in the historic Napa Mill neighbourhood, just steps from some of the best wineries and restaurants.</p>
                     </div>
                 </div>
             </div>

@@ -14,6 +14,8 @@ import Swal from "sweetalert2";
 import moment from "moment";
 import { MdOutlineStar } from "react-icons/md";
 import { RxAvatar } from "react-icons/rx";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 
 const RoomDetails = () => {
@@ -21,8 +23,18 @@ const RoomDetails = () => {
     const { user } = useAuth();
     const room = useLoaderData();
     const navigate = useNavigate();
+    const [reviews, setReview] = useState([]);
+
+
     // console.log(user);
-    const { _id, amenities, availability, bathrooms, description, images, pricePerNight, reviews, roomSize, specialOffers, title, type, view } = room;
+    const { _id, amenities, availability, bathrooms, description, images, pricePerNight, roomSize, specialOffers, title, type, view } = room;
+    
+    useEffect(() => {
+        axios.get(`http://localhost:5000/Review/${_id}`)
+            .then(res => {
+                setReview(res.data);
+            })
+    }, [_id]);
 
     const handleCheckInChange = (e) => {
         const checkInDate = new Date(e.target.value);
@@ -207,26 +219,26 @@ const RoomDetails = () => {
             <h2 className="lg:ml-20 font-mar text-4xl font-semibold">Room Reviews</h2>
             <div className="mx-auto max-w-[90vw] space-y-5 my-10">
                 {
-                    reviews.length>0 ?
-                    reviews.map((review, index) =>
-                        <div key={index} className="card bg-base-100 shadow-xl">
-                            <div className="card-body flex-row items-center gap-14">
-                                <div>
-                                    <RxAvatar size={50} />
-                                    <h4>{review.name}</h4>
-                                </div>
-                                <div className="flex-1">
-                                    <h2 className="card-title">{review.rating} <MdOutlineStar color="gold" size={25} /></h2>
-                                    <p className="max-w-96">{review.review}</p>
+                    reviews.length > 0 ?
+                        reviews.map((review, index) =>
+                            <div key={index} className="card bg-base-100 shadow-xl">
+                                <div className="card-body flex-row items-center gap-14">
+                                    <div>
+                                        <RxAvatar size={50} />
+                                        <h4>{review.name}</h4>
+                                    </div>
+                                    <div className="flex-1">
+                                        <h2 className="card-title">{review.rating} <MdOutlineStar color="gold" size={25} /></h2>
+                                        <p className="max-w-96">{review.review}</p>
 
-                                </div>
-                                <div className="card-actions text-end">
-                                    <p>{review.time}</p>
+                                    </div>
+                                    <div className="card-actions text-end">
+                                        <p>{review.timeFormatted}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ) :
-                    <p>No reviews available for the room currently</p>
+                        ) :
+                        <p>No reviews available for the room currently</p>
                 }
             </div>
 

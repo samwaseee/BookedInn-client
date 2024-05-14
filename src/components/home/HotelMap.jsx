@@ -2,8 +2,8 @@ import { Map, Marker } from "pigeon-maps"
 
 export function MyMap() {
     return (
-        <Map height={500} defaultCenter={[50.879, 4.6997]} defaultZoom={11}>
-            <Marker width={50} anchor={[50.879, 4.6997]} />
+        <Map height={500} defaultCenter={[38.297539, -122.286855]} defaultZoom={12}>
+            <Marker width={50} anchor={[38.297539, -122.286855]} />
         </Map>
     )
 }

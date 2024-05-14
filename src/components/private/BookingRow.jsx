@@ -18,12 +18,13 @@ const BookingRow = ({ booking, handleDelete }) => {
         const name = user.displayName;
         const review = form.review.value;
         const rating = form.rating.value;
-        const time = moment().format('MMMM Do YYYY, h:mm:ss a');
+        const time = new Date();
+        const timeFormatted = moment().format('MMMM Do YYYY, h:mm:ss a');
 
-        const roomReview = {email, name, time, rating, review }
+        const roomReview = {email, name, time, rating, review ,timeFormatted, roomId }
         console.log(roomReview)
 
-        fetch(`http://localhost:5000/rooms/${roomId}`, {
+        fetch("http://localhost:5000/Review", {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
