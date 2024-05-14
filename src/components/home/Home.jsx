@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Banner from "./Banner";
 import HotelMap from "./HotelMap";
 import OurStory from "./OurStory";
@@ -8,16 +8,42 @@ import { Autoplay, EffectCoverflow, Pagination, Navigation } from 'swiper/module
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
-import moment from "moment";
 import Reviews from "./Reviews";
 import { FaCar, FaHandHoldingUsd, FaParking, FaRegCalendarAlt, FaUser, FaWifi } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 
 
-const home = () => {
+const Home = () => {
 
     const rooms = useLoaderData();
-    //console.log(moment().format('MMMM Do YYYY, h:mm:ss a'))
+    const navigate = useNavigate();
+    const [hasVisited, setHasVisited] = useState(sessionStorage.getItem('hasVisited') || false);
+
+    useEffect(() => {
+        if (!hasVisited) {
+            sessionStorage.setItem('hasVisited', true);
+            Swal.fire({
+                title: 'Special Offers!',
+                text: 'Get 20% off your first booking with us!',
+                confirmButtonText: 'Book Now',
+                confirmButtonColor: '#B99D75',
+                showCloseButton: true,
+                width: 700,
+                heightAuto: true,
+                animation: true,
+                padding: "2rem",
+                color: "white",
+                background: 'linear-gradient(rgb(0,0,0,0.6), rgb(0,0,0,0.4)), url("https://cozystay.loftocean.com/countryside-lodge/wp-content/uploads/sites/5/2023/04/billy-jo-catbagan-zvhjrkA7gSk-unsplash.jpg") center / cover no-repeat',
+                backdrop: `rgba(0,0,0,0.6)`
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate('/rooms');
+                }
+            });
+        }
+    }, [hasVisited, setHasVisited, navigate]);
 
     return (
         <div>
@@ -108,4 +134,4 @@ const home = () => {
     );
 };
 
-export default home;
+export default Home;

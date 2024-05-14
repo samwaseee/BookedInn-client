@@ -4,7 +4,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { useLoaderData } from "react-router-dom";
 import { RxAvatar } from "react-icons/rx";
 import { MdStarRate } from "react-icons/md";
 import moment from "moment";
@@ -23,7 +22,7 @@ const Reviews = () => {
             })
     }, []);
 
-    console.log(reviews);
+    // console.log(reviews);
 
     return (
         <div className="mx-auto max-w-[95vw]">
