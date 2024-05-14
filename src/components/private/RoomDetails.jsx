@@ -17,11 +17,13 @@ import { RxAvatar } from "react-icons/rx";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Helmet } from "react-helmet";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 
 const RoomDetails = () => {
 
     const { user } = useAuth();
+    const axiosSecure = useAxiosSecure();
     const room = useLoaderData();
     const navigate = useNavigate();
     const [reviews, setReview] = useState([]);
@@ -57,34 +59,39 @@ const RoomDetails = () => {
         // console.log(bookingDetails);
 
 
-        fetch('http://localhost:5000/bookings', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(bookingDetails)
-        })
-            .then(res => res.json())
-            .then(data => {
-                //console.log(data);
-                if (data.insertedId) {
-                    Swal.fire({
-                        title: "Confirmation",
-                        text: "Your Reservation is confirmed!",
-                        icon: "success"
-                    });
-                    fetch(`http://localhost:5000/rooms/${_id}`, {
-                        method: 'PATCH',
-                        headers: {
-                            'content-type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            availability: false
-                        })
+
+
+        Swal.fire({
+            title: "Booking Confirmation",
+            text: `Name: ${name} |  
+                            Room : ${title} | 
+                            E-mail: ${email} |  
+                            Check in date: ${checkIn}
+                            Price: ${pricePerNight}$`,
+            showDenyButton: true,
+            heightAuto: true,
+            confirmButtonText: "Yes,Conifrm",
+            denyButtonText: `No`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.post('/bookings', bookingDetails);
+                Swal.fire("Room Reserved!", `Check in :${checkIn}`, "success");
+                fetch(`http://localhost:5000/rooms/${_id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        availability: false
                     })
-                    navigate('/')
-                }
-            })
+                })
+                navigate('/')
+
+            } else if (result.isDenied) {
+                Swal.fire("Room not Booked", "", "info");
+            }
+        });
+
     }
 
     return (
@@ -107,6 +114,7 @@ const RoomDetails = () => {
                 <SwiperSlide> <img src={images[0]} alt="" /> </SwiperSlide>
                 <SwiperSlide> <img src={images[1]} alt="" /> </SwiperSlide>
                 <SwiperSlide> <img src={images[2]} alt="" /> </SwiperSlide>
+                <SwiperSlide> <img src={images[0]} alt="" /> </SwiperSlide>
                 <SwiperSlide> <img src={images[1]} alt="" /> </SwiperSlide>
                 <SwiperSlide> <img src={images[2]} alt="" /> </SwiperSlide>
             </Swiper>

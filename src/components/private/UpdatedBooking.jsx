@@ -1,51 +1,39 @@
 import moment from 'moment';
-import React from 'react';
 import { Helmet } from 'react-helmet';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const UpdatedBooking = () => {
     const Room = useLoaderData();
     const navigate = useNavigate();
+    const axiosSecure = useAxiosSecure();
 
-    const { adult, checkIn, checkOut, children, customerName, email, image, pricePerNight, room, roomId, title, _id } = Room;
+    const { adult, checkIn, children, customerName, email, image, pricePerNight, room, roomId, title, _id } = Room;
 
-    const handleCheckInChange = (e) => {
-        const checkInDate = new Date(e.target.value);
-        checkInDate.setDate(checkInDate.getDate() + 1);
-        const checkOutInput = document.querySelector('input[name="checkOutDate"]');
-        checkOutInput.setAttribute('min', checkInDate.toISOString().split('T')[0]);
-    };
 
     const handleBookingUpdate = e => {
         e.preventDefault();
         const form = e.target;
         const newCheckIn = form.checkInDate.value;
-        const newCheckOut = form.checkOutDate.value;
 
-        fetch(`http://localhost:5000/bookings/${_id}`, {
-            method: 'PATCH',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                checkIn: newCheckIn,
-                checkOut: newCheckOut
+        axiosSecure.patch(`/bookings/${_id}`, {
+            checkIn: newCheckIn
+          })
+            .then(res => {
+              if (res.data.modifiedCount > 0) {
+                Swal.fire({
+                  title: "UPDATED",
+                  text: "Your Reservation is Updated!",
+                  icon: "success",
+                  confirmButtonColor: "#53624e"
+                });
+                navigate('/mybookings')
+              }
             })
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                if (data.modifiedCount > 0) {
-                    Swal.fire({
-                        title: "UPDATED",
-                        text: "Your Reservation is Updated!",
-                        icon: "success",
-                        confirmButtonColor: "#53624e"
-                      });
-                      navigate('/mybookings')
-                }
-            })
+            .catch(error => {
+              console.error(error);
+            });
     }
 
     return (
@@ -59,11 +47,7 @@ const UpdatedBooking = () => {
                     <h3 className='text-center font-mar text-3xl py-5'>{title}</h3>
                     <div className="flex border border-[#b99d75] p-2 items-center">
                         <p className="flex-1 text-xl">Check In <span className='text-base-300'>{checkIn}</span> </p>
-                        <input type="date" name="checkInDate" required className="bg-transparent p-2" min={moment().format('YYYY-MM-DD')} onChange={handleCheckInChange}></input>
-                    </div>
-                    <div className="flex border border-[#b99d75] p-2 justify-between">
-                        <p className="flex-1 text-xl">Check Out <span className='text-base-300'>{checkOut}</span> </p>
-                        <input type="date" name="checkOutDate" required className="bg-transparent  p-2" min={moment().format('YYYY-MM-DD')}></input>
+                        <input type="date" name="checkInDate" required className="bg-transparent p-2" min={moment().format('YYYY-MM-DD')}></input>
                     </div>
                     <div className="flex justify-between gap-2">
                         <div className="flex border border-[#b99d75] p-2 w-1/3">

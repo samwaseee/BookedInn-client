@@ -6,6 +6,8 @@ import useAuth from "../../hooks/useAuth";
 import moment from "moment";
 import PropTypes from 'prop-types';
 import { Helmet } from "react-helmet";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const BookingRow = ({ booking, handleDelete }) => {
     // console.log(booking);
@@ -25,13 +27,20 @@ const BookingRow = ({ booking, handleDelete }) => {
         const roomReview = { email, name, time, rating, review, timeFormatted, roomId }
         console.log(roomReview)
 
-        fetch("http://localhost:5000/Review", {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(roomReview)
-        })
+        axios.post("http://localhost:5000/Review", roomReview)
+            .then(() => {
+                Swal.fire({
+                    title: 'Review submitted!',
+                    text: 'Your review has been successfully submitted.',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                });
+            })
+            .catch(error => {
+                console.log(error)
+            });
+
+        form.reset();
     }
 
     return (

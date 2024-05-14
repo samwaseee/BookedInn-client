@@ -38,7 +38,17 @@ const router = createBrowserRouter([
             },
             {
                 path: '/updatebooking/:id',
-                loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`),
+                loader: ({ params }) => {
+                    return fetch(`http://localhost:5000/bookings/${params.id}`, {
+                      credentials: 'include'
+                    })
+                    .then(response => {
+                      if (response.ok) {
+                        return response.json();
+                      }
+                      throw new Error('Error fetching booking data');
+                    });
+                  },
                 element: <PrivateRoute><UpdatedBooking></UpdatedBooking></PrivateRoute>
             },
             {

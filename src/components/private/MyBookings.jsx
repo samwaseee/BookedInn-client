@@ -58,6 +58,8 @@ const MyBookings = () => {
             showCancelButton: true,
             confirmButtonColor: "#53624e",
             cancelButtonColor: "#d33",
+            background: "#53624E",
+            color: "white",
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
@@ -82,10 +84,11 @@ const MyBookings = () => {
                     })
                 })
                 Swal.fire({
-                    title: "Deleted!",
+                    title: "Terminated!",
                     text: "Your reservation has been cancelled",
                     icon: "success",
-                    color: "white"
+                    color: "white",
+                    background: "#b99d75",
                 });
             }
             else if (result.dismiss === Swal.DismissReason.cancel) {
