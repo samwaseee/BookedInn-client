@@ -33,6 +33,7 @@ const Home = () => {
                 width: 700,
                 heightAuto: true,
                 animation: true,
+                focusCancel: true,
                 padding: "2rem",
                 color: "white",
                 background: 'linear-gradient(rgb(0,0,0,0.6), rgb(0,0,0,0.4)), url("https://cozystay.loftocean.com/countryside-lodge/wp-content/uploads/sites/5/2023/04/billy-jo-catbagan-zvhjrkA7gSk-unsplash.jpg") center / cover no-repeat',
