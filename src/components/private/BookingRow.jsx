@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import moment from "moment";
 import PropTypes from 'prop-types';
+import { Helmet } from "react-helmet";
 
 const BookingRow = ({ booking, handleDelete }) => {
     // console.log(booking);
@@ -21,7 +22,7 @@ const BookingRow = ({ booking, handleDelete }) => {
         const time = new Date();
         const timeFormatted = moment().format('MMMM Do YYYY, h:mm:ss a');
 
-        const roomReview = {email, name, time, rating, review ,timeFormatted, roomId }
+        const roomReview = { email, name, time, rating, review, timeFormatted, roomId }
         console.log(roomReview)
 
         fetch("http://localhost:5000/Review", {
@@ -34,48 +35,54 @@ const BookingRow = ({ booking, handleDelete }) => {
     }
 
     return (
-        <tr>
-            <th>
-                <button onClick={() => handleDelete(_id, roomId, checkIn)} className="btn btn-ghost p-1">
-                    <RiDeleteBin5Line color="red" size={20} />
-                </button>
-            </th>
-            <td>
-                <div className="avatar">
-                    <div className="w-24 h-24">
-                        <img src={image} alt={title} />
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div>
-                    <p>{title}</p>
-                    <p>Rooms:{room}, Adults:{adult}, Children:{children}</p>
-                </div>
-            </td>
-            <td>{checkIn}</td>
-            <td>${pricePerNight}</td>
-            <td>
-                <Link to={`/updatebooking/${_id}`} className=""><button className="btn btn-ghost"> <GrUpdate size={20} /> </button></Link>
-            </td>
-            <td>
-                <form onSubmit={handleReview}>
-                    <div className="flex items-center border border-primary px-2 mb-2 w-1/2">
-                        <p className="flex-1 text-lg text-secondary">rating </p><MdOutlineStar />
-                        <select name="rating" id="" className="bg-transparent p-2">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                    </div>
-                    <textarea className="textarea textarea-bordered border border-primary w-full rounded-none" name="review" placeholder="Write your review here..."></textarea>
-                    <button className="btn btn-outline rounded-none btn-sm text-primary">Submit review</button>
-                </form>
-            </td>
 
-        </tr>
+        <>
+            <Helmet>
+                <title>BookedInn | My Bookings</title>
+            </Helmet>
+            <tr>
+                <th>
+                    <button onClick={() => handleDelete(_id, roomId, checkIn)} className="btn btn-ghost p-1">
+                        <RiDeleteBin5Line color="red" size={20} />
+                    </button>
+                </th>
+                <td>
+                    <div className="avatar">
+                        <div className="w-24 h-24">
+                            <img src={image} alt={title} />
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <p>{title}</p>
+                        <p>Rooms:{room}, Adults:{adult}, Children:{children}</p>
+                    </div>
+                </td>
+                <td>{checkIn}</td>
+                <td>${pricePerNight}</td>
+                <td>
+                    <Link to={`/updatebooking/${_id}`} className=""><button className="btn btn-ghost"> <GrUpdate size={20} /> </button></Link>
+                </td>
+                <td>
+                    <form onSubmit={handleReview}>
+                        <div className="flex items-center border border-primary px-2 mb-2 w-1/2">
+                            <p className="flex-1 text-lg text-secondary">rating </p><MdOutlineStar />
+                            <select name="rating" id="" className="bg-transparent p-2">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <textarea className="textarea textarea-bordered border border-primary w-full rounded-none" name="review" placeholder="Write your review here..."></textarea>
+                        <button className="btn btn-outline rounded-none btn-sm text-primary">Submit review</button>
+                    </form>
+                </td>
+
+            </tr>
+        </>
     );
 };
 

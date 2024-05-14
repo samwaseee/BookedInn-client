@@ -4,6 +4,7 @@ import BookingRow from "./BookingRow";
 import Swal from "sweetalert2";
 import moment from "moment";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const MyBookings = () => {
 
@@ -17,7 +18,7 @@ const MyBookings = () => {
             .then(res => {
                 setBookings(res.data);
             })
-    }, [url,axiosSecure]);
+    }, [url, axiosSecure]);
 
     const handleDelete = (id, roomId, checkIn) => {
         const currentDate = moment();
@@ -60,15 +61,15 @@ const MyBookings = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/bookings/${id}`, {
-                    method: 'DELETE'
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        // console.log(data);
-                        if (data.deletedCount > 0) {
-                            const remaining = bookings.filter(booking => booking._id !== id);
-                            setBookings(remaining);
+                const deleteUrl = `/bookings/${id}`;
+                axiosSecure.delete(deleteUrl)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            const remainingBookings = bookings.filter(
+                                (booking) => booking._id !== id
+                            );
+                            console.log(remainingBookings);
+                            setBookings(remainingBookings);
                         }
                     })
                 fetch(`http://localhost:5000/rooms/${roomId}`, {
@@ -104,6 +105,9 @@ const MyBookings = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>BookedInn | My Bookings</title>
+            </Helmet>
             <h2 className="text-5xl text-center my-5">{user.displayName} Reservations</h2>
             <div className="overflow-x-auto w-full">
                 <table className="table w-full">

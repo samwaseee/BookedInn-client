@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 
 const SocialLogin = () => {
     const { GoogleLogin, GithubLogin } = useAuth();
@@ -18,11 +19,20 @@ const SocialLogin = () => {
 
     const handleGoogleLogin = () => {
         GoogleLogin()
-            .then(() => {
+            .then((result) => {
                 // console.log(result.user);
-                toast.success('Google account logged in successfully!');
-                setLogSuccess('User created successfully');
-                navigate(location?.state ? location.state : '/');
+                const user = result.user.email;
+
+                //get access token
+                axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
+                    .then(res => {
+                        console.log(res.data)
+                        if (res.data.success) {
+                            toast.success('Google account logged in successfully!');
+                            setLogSuccess('User created successfully');
+                            navigate(location?.state ? location.state : '/');
+                        }
+                    })
             })
             .catch(error => {
                 console.error(error);

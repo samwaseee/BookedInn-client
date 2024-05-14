@@ -16,6 +16,7 @@ import { MdOutlineStar } from "react-icons/md";
 import { RxAvatar } from "react-icons/rx";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 
 
 const RoomDetails = () => {
@@ -28,7 +29,7 @@ const RoomDetails = () => {
 
     // console.log(user);
     const { _id, amenities, availability, bathrooms, description, images, pricePerNight, roomSize, specialOffers, title, type, view } = room;
-    
+
     useEffect(() => {
         axios.get(`http://localhost:5000/Review/${_id}`)
             .then(res => {
@@ -36,20 +37,12 @@ const RoomDetails = () => {
             })
     }, [_id]);
 
-    const handleCheckInChange = (e) => {
-        const checkInDate = new Date(e.target.value);
-        checkInDate.setDate(checkInDate.getDate() + 1);
-        const checkOutInput = document.querySelector('input[name="checkOutDate"]');
-        checkOutInput.setAttribute('min', checkInDate.toISOString().split('T')[0]);
-    };
-
     const handleBooking = e => {
         e.preventDefault();
         const form = e.target;
         const name = user.displayName;
         const email = user.email;
         const checkIn = form.checkInDate.value;
-        const checkOut = form.checkOutDate.value;
         const room = form.rooms.value;
         const adult = form.adults.value;
         const children = form.children.value;
@@ -58,8 +51,7 @@ const RoomDetails = () => {
             image: images[0],
             title,
             email,
-            checkIn,
-            checkOut, room, adult, children, pricePerNight,
+            checkIn, room, adult, children, pricePerNight,
             roomId: _id
         }
         // console.log(bookingDetails);
@@ -97,6 +89,9 @@ const RoomDetails = () => {
 
     return (
         <>
+            <Helmet>
+                <title>BookedInn | {title}</title>
+            </Helmet>
             <Swiper
                 slidesPerView={1.5}
                 centeredSlides={true}
@@ -150,13 +145,9 @@ const RoomDetails = () => {
                 <form onSubmit={handleBooking} className=" bg-base-100 shadow-xl h-full ml-20">
                     <div className="border-2 border-[#b99d75] p-8 space-y-3 px-10">
                         <p className="text-3xl font-mar font-semibold text-center pb-5">BOOK YOUR STAY</p>
-                        <div className="flex border border-[#b99d75] p-2 items-center">
+                        <div className="flex border border-[#b99d75] p-2 w-96 items-center">
                             <p className="flex-1 text-xl">Check In</p>
-                            <input type="date" name="checkInDate" required className="bg-transparent p-2" min={moment().format('YYYY-MM-DD')} onChange={handleCheckInChange}></input>
-                        </div>
-                        <div className="flex border border-[#b99d75] p-2 w-80 justify-between">
-                            <p className="flex-1 text-xl">Check Out</p>
-                            <input type="date" name="checkOutDate" required className="bg-transparent  p-2" min={moment().format('YYYY-MM-DD')}></input>
+                            <input type="date" name="checkInDate" required className="bg-transparent p-2" min={moment().format('YYYY-MM-DD')}></input>
                         </div>
                         <div className="flex border border-[#b99d75] p-2">
                             <p className="flex-1 text-xl">Rooms</p>

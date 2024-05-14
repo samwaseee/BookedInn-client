@@ -12,6 +12,7 @@ import Reviews from "./Reviews";
 import { FaCar, FaHandHoldingUsd, FaParking, FaRegCalendarAlt, FaUser, FaWifi } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 
 
@@ -33,11 +34,11 @@ const Home = () => {
                 width: 700,
                 heightAuto: true,
                 animation: true,
-                focusCancel: true,
+                allowEnterKey: false,
                 padding: "2rem",
                 color: "white",
                 background: 'linear-gradient(rgb(0,0,0,0.6), rgb(0,0,0,0.4)), url("https://cozystay.loftocean.com/countryside-lodge/wp-content/uploads/sites/5/2023/04/billy-jo-catbagan-zvhjrkA7gSk-unsplash.jpg") center / cover no-repeat',
-                backdrop: `rgba(0,0,0,0.6)`
+                backdrop: `rgba(0,0,0,0.7)`
             }).then((result) => {
                 if (result.isConfirmed) {
                     navigate('/rooms');
@@ -48,6 +49,9 @@ const Home = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>BookedInn | Home</title>
+            </Helmet>
             <Banner></Banner>
             <OurStory></OurStory>
             <HotelMap></HotelMap>
