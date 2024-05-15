@@ -22,26 +22,26 @@ const OurStory = () => {
 			</div>
 			<div className="md:flex justify-center max-w-[90vw] mx-auto my-10">
 				<div className="md:w-1/3">
-					<div data-aos="fade-right">
+					<div data-aos="fade-down">
 						<img src="https://cozystay.loftocean.com/countryside-lodge/wp-content/uploads/sites/5/2023/03/img-51.jpg" alt="" className="h-96 lg:h-[630px]" />
 						<p>Horse Riding Valley Tour</p>
 					</div>
-					<div data-aos="zoom-in-right">
+					<div data-aos="zoom-in-up">
 						<img src="https://cozystay.loftocean.com/countryside-lodge/wp-content/uploads/sites/5/2023/03/img-53.jpg" alt="" className="mt-32 lg:ml-32" />
 						<p>Perfect Picnic Settings & Spots</p>
 					</div>
 				</div>
-				<div className="w-1/4 lg:w-auto">
+				<div className="md:w-1/4 lg:w-auto">
 					<div className="border border-[#b99d75] h-64 md:h-[460px] w-[2px] bg-[#b99d75] mb-10 mx-auto"></div>
 					<h3 className="text-3xl font-mar lg:w-96">Wonderful Countryside Activities & Great Experiences</h3>
 					<div className="border border-[#b99d75] h-64 md:h-[960px] w-[2px] bg-[#b99d75] mb-10 mx-auto"></div>
 				</div>
 				<div className="md:w-1/3">
-					<div data-aos="fade-left">
+					<div data-aos="fade-up">
 						<img src="https://cozystay.loftocean.com/countryside-lodge/wp-content/uploads/sites/5/2023/03/img-52.jpg" alt="" className="mt-44 w-[420px]" />
 						<p>Self-guided Walking Tours</p>
 					</div>
-					<div data-aos="zoom-in-up">
+					<div data-aos="zoom-in-down">
 						<img src="https://cozystay.loftocean.com/countryside-lodge/wp-content/uploads/sites/5/2023/03/img-54.jpg" alt="" className="mt-72 lg:-ml-24 w-[150%]" />
 						<p>Blueberry Picking Experience</p>
 					</div>

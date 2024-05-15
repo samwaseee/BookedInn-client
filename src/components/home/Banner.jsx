@@ -5,7 +5,7 @@ const Banner = () => {
         <div>
             <div className="bg-[url('https://cozystay.loftocean.com/countryside-lodge/wp-content/uploads/sites/5/2023/03/img-50.jpg')] bg-cover bg-center text-white">
                 <div className="flex justify-between bg-black opacity-65">
-                    <div className="md:max-w-[60vw] p-20 my-20 space-y-8">
+                    <div className="md:max-w-[60vw] md:p-20 my-20 space-y-8">
                         <p className="text-xl">BEST PLACE FOR RELAX</p>
                         <h3 className="text-6xl">Perfect Countryside Vacation at BookedInn Lodge</h3>
                         <p className="text-2xl">Nestled in Napa Valley, BookedInn Lodge is a luxury boutique hotel in the heart of wine country, conveniently located in the historic Napa Mill neighbourhood, just steps from some of the best wineries and restaurants.</p>
