@@ -63,14 +63,14 @@ const Home = () => {
                         Select Your Cozy Room
                     </h3>
                     <div>
-                        <p className="text-lg">In a new setting composed of exceptional hotels chalets, nestled in a forest of pine trees, the CozyStay Lodge is expanding into a harmonious and refined unit that affirms it’s purpose: to sublimate the stay of its guests by a tailor-made service.</p>	            </div>
+                        <p className="text-lg">In a new setting composed of exceptional hotels chalets, nestled in a forest of pine trees, the BookedInn Lodge is expanding into a harmonious and refined unit that affirms it’s purpose: to sublimate the stay of its guests by a tailor-made service.</p>	            </div>
                 </div>
                 <Swiper
                     effect={'coverflow'}
                     grabCursor={true}
                     centeredSlides={true}
                     spaceBetween={50}
-                    slidesPerView={3}
+                    slidesPerView={1}
                     coverflowEffect={{
                         rotate: 50,
                         stretch: 0,
@@ -87,6 +87,17 @@ const Home = () => {
                     }}
                     navigation={true}
                     modules={[Autoplay, Pagination, Navigation, EffectCoverflow]}
+                    breakpoints={{
+                        640: {
+                          slidesPerView: 1,
+                        },
+                        768: {
+                          slidesPerView: 2,
+                        },
+                        1024: {
+                          slidesPerView: 3,
+                        },
+                      }}
                 >
                     {
                         rooms.map(room => <SwiperSlide key={room._id}><Room
@@ -95,15 +106,15 @@ const Home = () => {
                     }
                 </Swiper>
             </div>
-            <div className="flex my-20 w-[90vw] mx-auto">
-                <div className="w-2/3">
+            <div className="md:flex my-20 w-[90vw] mx-auto items-center">
+                <div className="lg:w-2/3">
                     <p>DISCOVER THE SERVICES WE OFFERED</p>
                     <h3 className="text-5xl font-mar">Chalets With All the Benefits of a Hotel</h3>
                     <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-14">
                         <div className="space-y-10">
                             <div className="">
                                 <FaCar size={50} color="gold" className=" text-primary-500 mx-auto" />
-                                <p className="text-lg font-medium text-gray-800">Airport Pick-up Service</p>
+                                <p className="text-lg text-center font-medium text-gray-800">Airport Pick-up Service</p>
                             </div>
                             <div className="text-center grid items-center">
                                 <FaUser size={50} color="gold" className=" text-primary-500 mx-auto" />
@@ -131,7 +142,7 @@ const Home = () => {
                     </div>
                 </div>
                 <div>
-                    <img src="https://cozystay.loftocean.com/countryside-lodge/wp-content/uploads/sites/5/2023/03/img-62-1200x1025.jpg" alt="" />
+                    <img src="https://cozystay.loftocean.com/countryside-lodge/wp-content/uploads/sites/5/2023/03/img-62-1200x1025.jpg" alt="" className="h-96 lg:h-auto"/>
                 </div>
             </div>
             <Reviews></Reviews>

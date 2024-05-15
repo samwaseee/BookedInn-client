@@ -13,7 +13,7 @@ import axios from "axios";
 
 const Reviews = () => {
 
-    const [reviews,setReview] = useState([]);
+    const [reviews, setReview] = useState([]);
 
     useEffect(() => {
         axios.get(`https://booked-inn-server.vercel.app/Review`)
@@ -29,16 +29,27 @@ const Reviews = () => {
             <p className="text-center mt-10 text-secondary text-sm font-semibold">FEEDBACK FROM OUR DEAR GUESTS</p>
             <h1 className="text-5xl text-center font-mar my-10">What they say about us</h1>
             <Swiper
-                slidesPerView={3}
+                slidesPerView={1}
                 spaceBetween={30}
                 grabCursor={true}
                 pagination={{
                     clickable: true
                 }}
                 autoplay={
-                    {delay: 3000}
+                    { delay: 3000 }
                 }
                 modules={[Pagination, Autoplay]}
+                breakpoints={{
+                    640: {
+                        slidesPerView: 1,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                    },
+                }}
             >
                 {
                     reviews.map((userReview, index) =>
@@ -62,7 +73,7 @@ const Reviews = () => {
                     )
                 }
             </Swiper>
-        </div>
+        </div >
     );
 };
 

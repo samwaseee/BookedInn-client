@@ -119,7 +119,7 @@ const RoomDetails = () => {
                 <SwiperSlide> <img src={images[2]} alt="" /> </SwiperSlide>
             </Swiper>
 
-            <div className="flex m-20">
+            <div className="flex flex-col-reverse md:flex-row m-5 lg:m-20">
                 <div className="space-y-10">
                     <h3 className="text-6xl font-mar">{title}</h3>
                     <p className="text-2xl">{parseInt(roomSize)}m<sup>2</sup> / {type} / {view}</p>
@@ -145,15 +145,26 @@ const RoomDetails = () => {
                         <p>Writing desk with USB ports for documenting your adventures</p>
                         <p>Room safe for your top mountain photos</p>
                         <p>Service station with Lavazza coffee machine, kettle and tea</p>
-                        <p>Bathroom with rain shower</p>
+                        <p>{bathrooms} Bathroom with rain shower</p>
                         <p>Comfortable terry towels and bathrobes</p>
 
                     </div>
+                    {
+                        specialOffers && <div className="text-4xl">Special Offers</div>
+                    }
+                    {
+                        specialOffers &&
+                        specialOffers.map(specialOffer => <div key={specialOffer}>
+                            <p className="text-2xl text-primary">{specialOffer.offer}</p>
+                            <p>{specialOffer.description}</p>
+                            </div>)
+                    }
                 </div>
-                <form onSubmit={handleBooking} className=" bg-base-100 shadow-xl h-full ml-20">
+                <form onSubmit={handleBooking} className=" bg-base-100 shadow-xl h-full mx-auto md:ml-14 lg:ml-20">
                     <div className="border-2 border-[#b99d75] p-8 space-y-3 px-10">
                         <p className="text-3xl font-mar font-semibold text-center pb-5">BOOK YOUR STAY</p>
-                        <div className="flex border border-[#b99d75] p-2 w-96 items-center">
+                        {availability && <p className="text-center">Room available for reservation</p>}
+                        <div className="flex border border-[#b99d75] p-2 lg:w-96 items-center">
                             <p className="flex-1 text-xl">Check In</p>
                             <input type="date" name="checkInDate" required className="bg-transparent p-2" min={moment().format('YYYY-MM-DD')}></input>
                         </div>
@@ -221,7 +232,7 @@ const RoomDetails = () => {
                     reviews.length > 0 ?
                         reviews.map((review, index) =>
                             <div key={index} className="card bg-base-100 shadow-xl">
-                                <div className="card-body flex-row items-center gap-14">
+                                <div className="card-body md:flex-row items-center gap-14">
                                     <div>
                                         <RxAvatar size={50} />
                                         <h4>{review.name}</h4>

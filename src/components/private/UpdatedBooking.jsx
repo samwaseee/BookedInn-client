@@ -37,11 +37,11 @@ const UpdatedBooking = () => {
     }
 
     return (
-        <div className=''>
+        <div>
             <Helmet>
                 <title>BookedInn | Update Bookings</title>
             </Helmet>
-            <form onSubmit={handleBookingUpdate} className=" bg-base-100 shadow-xl h-full ml-20">
+            <form onSubmit={handleBookingUpdate} className=" bg-base-100 shadow-xl h-full mx-auto lg:ml-20">
                 <div className="border-2 border-[#b99d75] p-8 space-y-3 px-10">
                     <img src={image} alt={title} className='w-1/2 mx-auto' />
                     <h3 className='text-center font-mar text-3xl py-5'>{title}</h3>

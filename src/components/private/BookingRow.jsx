@@ -75,8 +75,8 @@ const BookingRow = ({ booking, handleDelete }) => {
                 </td>
                 <td>
                     <form onSubmit={handleReview}>
-                        <div className="flex items-center border border-primary px-2 mb-2 w-1/2">
-                            <p className="flex-1 text-lg text-secondary">rating </p><MdOutlineStar />
+                        <div className="flex items-center border border-primary px-2 mb-2 lg:w-1/2">
+                            <p className="lg:flex-1 text-lg text-secondary">rating </p><MdOutlineStar className="ml-5"/>
                             <select name="rating" id="" className="bg-transparent p-2">
                                 <option value="1">1</option>
                                 <option value="2">2</option>

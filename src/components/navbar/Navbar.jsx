@@ -37,15 +37,6 @@ const Navbar = () => {
                 viewTransitionName: isTransitioning ? "slide" : "",
             };
         }}>Rooms</NavLink></li>
-        <li><NavLink to="/contact" className="rounded-sm" style={({ isActive, isTransitioning }) => {
-            return {
-                fontWeight: isActive ? "bold" : "",
-                color: isActive ? "#b99d75" : "white",
-                backgroundColor: isActive ? "transparent" : "",
-                borderBottom: isActive ? "solid #b99d75" : "",
-                viewTransitionName: isTransitioning ? "slide" : "",
-            };
-        }}>Contact</NavLink></li>
         <li><NavLink to="/about" className="rounded-sm" style={({ isActive, isTransitioning }) => {
             return {
                 fontWeight: isActive ? "bold" : "",
@@ -73,12 +64,12 @@ const Navbar = () => {
 
     return (
         <div className="navbar h-24 bg-[url('https://cozystay.loftocean.com/countryside-lodge/wp-content/uploads/sites/5/2023/05/bg-pattern-3.jpg')]">
-            <div className="navbar-start">
+            <div className="w-1/3 md:navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </div>
-                    <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-secondary w-52">
                         {links}
                     </ul>
                 </div><div className="navbar-center hidden lg:flex">
@@ -89,7 +80,7 @@ const Navbar = () => {
 
             </div>
             <div className="grid">
-                <a className="btn btn-ghost text-4xl font-mar">BookedInn</a>
+                <a className="btn btn-ghost text-2xl md:text-4xl font-mar">BookedInn</a>
                 <div className="flex gap-2 items-center justify-center">
                     <FaStar size={7} color="#b99d75" />
                     <FaStar size={10} color="#b99d75" />
@@ -105,7 +96,7 @@ const Navbar = () => {
                             <a data-tooltip-id="my-tooltip" data-tooltip-content={user.displayName}>
                                 <button className=""> <img src={user.photoURL} alt="No image" className="w-10" /> </button>
                             </a>
-                            <Tooltip id="my-tooltip" />
+                            <Tooltip id="my-tooltip" className="z-10"/>
                             <button onClick={handleSignout} className="btn btn-outline text-primary rounded-none">Sign Out</button>
                         </div>
                         :

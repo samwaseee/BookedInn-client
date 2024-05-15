@@ -28,12 +28,12 @@ const RoomCard = ({ room, index }) => {
             <div>
                 <Link to={`/rooms/${_id}`} className="hero bg-base-200 shadow-xl w-[95vw] mx-auto">
                     <div className="">
-                        <div className={`hero-content gap-14 ${index % 2 === 0 ? 'flex-row-reverse' : ''}`}>
-                            <img src={images[0]} className="max-w-xl rounded-lg shadow-2xl hover:scale-110 duration-700" />
-                            <div>
+                        <div className={`md:hero-content p-5 lg:p-0 gap-14 ${index % 2 === 0 ? 'flex-row-reverse' : ''}`}>
+                            <img src={images[0]} className="md:max-w-xl w-96 lg:w-auto rounded-lg shadow-2xl mb-5 md:mb-0 hover:scale-110 duration-700" />
+                            <div className=''>
                                 <h1 className="text-5xl font-bold font-mar">{title}</h1>
                                 <p className="py-6">{description.slice(description.indexOf('.') + 1)}</p>
-                                <p>({reviews.length > 0 ? reviews.length : 'no review'}){averageRating > 0 && averageRating}{averageRating < 5 ? <IoMdStarHalf /> : <MdStarRate />}</p>
+                                <p className='flex items-end'>({reviews.length > 0 ? reviews.length : 'no review'})  {averageRating > 0 && averageRating}{(averageRating < 5 ) ? <IoMdStarHalf color='gold' size={30}/> : <MdStarRate color='gold' size={30}/>}</p>
                                 <div className='flex items-center'>
                                     <button className=" border-black border-b-2 space-y-3">Discover  more</button><IoIosArrowForward />
                                 </div>
