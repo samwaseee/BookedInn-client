@@ -11,7 +11,7 @@ const Rooms = () => {
     const [value, setValue] = useState([100, 500]);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/rooms?minPrice=${value[0]}&maxPrice=${value[1]}`)
+        axios.get(`https://booked-inn-server.vercel.app/rooms?minPrice=${value[0]}&maxPrice=${value[1]}`)
             .then(res => {
                 setRooms(res.data);
             })

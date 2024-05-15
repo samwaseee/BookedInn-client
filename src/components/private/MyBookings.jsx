@@ -74,7 +74,7 @@ const MyBookings = () => {
                             setBookings(remainingBookings);
                         }
                     })
-                fetch(`http://localhost:5000/rooms/${roomId}`, {
+                fetch(`https://booked-inn-server.vercel.app/rooms/${roomId}`, {
                     method: 'PATCH',
                     headers: {
                         'content-type': 'application/json'

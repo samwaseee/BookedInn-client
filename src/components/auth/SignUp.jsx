@@ -27,7 +27,7 @@ const SignUp = () => {
         const password = form.get('password');
         const photo = form.get('photo');
 
-        console.log(password);
+        // console.log(password);
 
         if (password.length < 6) {
             setRegError("Password should be at least 6 characters or longer");
@@ -47,7 +47,7 @@ const SignUp = () => {
 
         createUser(email, password)
             .then(result => {
-                console.log(result.user)
+                // console.log(result.user)
                 setRegSuccess('Registration Successful')
                 updateProfile(result.user, {
                     displayName: name,

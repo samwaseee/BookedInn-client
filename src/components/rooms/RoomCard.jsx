@@ -1,10 +1,27 @@
-import { IoIosArrowForward } from 'react-icons/io';
+import { IoIosArrowForward, IoMdStarHalf } from 'react-icons/io';
+import { MdStarRate } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const RoomCard = ({ room, index }) => {
 
+    const [reviews, setReview] = useState([]);
+
     const { _id, images, title, description, pricePerNight, type, view, roomSize } = room;
+
+
+    useEffect(() => {
+        axios.get(`https://booked-inn-server.vercel.app/Review/${_id}`)
+            .then(res => {
+                setReview(res.data);
+            })
+    }, [_id]);
+
+    const ratings = reviews.map((review) => parseInt(review.rating));
+    const averageRating = ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length;
+
 
     return (
         <div>
@@ -16,6 +33,7 @@ const RoomCard = ({ room, index }) => {
                             <div>
                                 <h1 className="text-5xl font-bold font-mar">{title}</h1>
                                 <p className="py-6">{description.slice(description.indexOf('.') + 1)}</p>
+                                <p>({reviews.length > 0 ? reviews.length : 'no review'}){averageRating > 0 && averageRating}{averageRating < 5 ? <IoMdStarHalf /> : <MdStarRate />}</p>
                                 <div className='flex items-center'>
                                     <button className=" border-black border-b-2 space-y-3">Discover  more</button><IoIosArrowForward />
                                 </div>

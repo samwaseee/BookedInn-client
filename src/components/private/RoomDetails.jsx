@@ -33,7 +33,7 @@ const RoomDetails = () => {
     const { _id, amenities, availability, bathrooms, description, images, pricePerNight, roomSize, specialOffers, title, type, view } = room;
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/Review/${_id}`)
+        axios.get(`https://booked-inn-server.vercel.app/Review/${_id}`)
             .then(res => {
                 setReview(res.data);
             })
@@ -76,7 +76,7 @@ const RoomDetails = () => {
             if (result.isConfirmed) {
                 axiosSecure.post('/bookings', bookingDetails);
                 Swal.fire("Room Reserved!", `Check in :${checkIn}`, "success");
-                fetch(`http://localhost:5000/rooms/${_id}`, {
+                fetch(`https://booked-inn-server.vercel.app/rooms/${_id}`, {
                     method: 'PATCH',
                     headers: {
                         'content-type': 'application/json'

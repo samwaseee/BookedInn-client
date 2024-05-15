@@ -20,7 +20,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                loader: () => fetch('http://localhost:5000/rooms'),
+                loader: () => fetch('https://booked-inn-server.vercel.app/rooms'),
                 element: <Home></Home>
             },
             {
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/rooms/:id',
-                loader: ({ params }) => fetch(`http://localhost:5000/rooms/${params.id}`),
+                loader: ({ params }) => fetch(`https://booked-inn-server.vercel.app/rooms/${params.id}`),
                 element: <PrivateRoute><RoomDetails></RoomDetails></PrivateRoute>
             },
             {
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
             {
                 path: '/updatebooking/:id',
                 loader: ({ params }) => {
-                    return fetch(`http://localhost:5000/bookings/${params.id}`, {
+                    return fetch(`https://booked-inn-server.vercel.app/bookings/${params.id}`, {
                       credentials: 'include'
                     })
                     .then(response => {

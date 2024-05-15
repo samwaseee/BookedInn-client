@@ -27,7 +27,7 @@ const BookingRow = ({ booking, handleDelete }) => {
         const roomReview = { email, name, time, rating, review, timeFormatted, roomId }
         console.log(roomReview)
 
-        axios.post("http://localhost:5000/Review", roomReview)
+        axios.post("https://booked-inn-server.vercel.app/Review", roomReview)
             .then(() => {
                 Swal.fire({
                     title: 'Review submitted!',
