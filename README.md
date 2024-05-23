@@ -1,7 +1,9 @@
 # BookedInn
 
 Welcome to the GitHub repository of BookedInn, a hotel booking website. 
-You can visit the live site here. > https://bookedinn-a11.web.app/
+## You can visit the live site here. > https://bookedinn-a11.web.app/
+
+### Server-side repo: https://github.com/samwaseee/BookedInn-server
 
 ## Features and Characteristics
 
