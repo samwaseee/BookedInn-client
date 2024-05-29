@@ -6,14 +6,14 @@ import { toast } from "react-toastify";
 
 const Navbar = () => {
 
-    const { user,logOut } = useAuth();
+    const { user, logOut } = useAuth();
 
     const handleSignout = () => {
         logOut()
-            .then(()=>{
+            .then(() => {
                 toast.info("Signed Out ");
             })
-            .catch(error=>{
+            .catch(error => {
                 console.log(error)
             })
     }
@@ -37,6 +37,20 @@ const Navbar = () => {
                 viewTransitionName: isTransitioning ? "slide" : "",
             };
         }}>Rooms</NavLink></li>
+        <li>
+            {
+                user &&
+                <NavLink to="/resturant" className="rounded-sm" style={({ isActive, isTransitioning }) => {
+                    return {
+                        fontWeight: isActive ? "bold" : "",
+                        color: isActive ? "#b99d75" : "white",
+                        backgroundColor: isActive ? "transparent" : "",
+                        borderBottom: isActive ? "solid #b99d75" : "",
+                        viewTransitionName: isTransitioning ? "slide" : "",
+                    };
+                }}>Our Resturant</NavLink>
+            }
+        </li>
         <li><NavLink to="/about" className="rounded-sm" style={({ isActive, isTransitioning }) => {
             return {
                 fontWeight: isActive ? "bold" : "",
@@ -96,7 +110,7 @@ const Navbar = () => {
                             <a data-tooltip-id="my-tooltip" data-tooltip-content={user.displayName}>
                                 <button className=""> <img src={user.photoURL} alt="No image" className="w-10" /> </button>
                             </a>
-                            <Tooltip id="my-tooltip" className="z-10"/>
+                            <Tooltip id="my-tooltip" className="z-10" />
                             <button onClick={handleSignout} className="btn btn-outline text-primary rounded-none">Sign Out</button>
                         </div>
                         :
