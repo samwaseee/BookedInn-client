@@ -3,6 +3,9 @@
 Welcome to the GitHub repository of BookedInn, a hotel booking website. 
 
 > ### **[Live site]( https://bookedinn-a11.web.app)**
+
+<img width="1024" height="4178" src="https://github.com/user-attachments/assets/dd861381-7c4a-4106-aa2d-8bba4bc740b0" />
+
 >  **[Server side repo](https://github.com/samwaseee/BookedInn-server)**
 
 
